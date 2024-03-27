@@ -1,18 +1,12 @@
-defmodule Kef do
-  @moduledoc """
-  Documentation for `Kef`.
-  """
+defmodule Kef.Application do
+  use Application
 
-  @doc """
-  Hello world.
+  def start(_type, _args) do
+    children = [
+      {Server, []}
+    ]
 
-  ## Examples
-
-      iex> Kef.hello()
-      :world
-
-  """
-  def hello do
-    :world
+    opts = [strategy: :one_for_one, name: Kef.Supervisor]
+    Supervisor.start_link(children, opts)
   end
 end
